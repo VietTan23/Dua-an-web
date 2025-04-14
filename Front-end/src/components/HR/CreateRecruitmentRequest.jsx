@@ -30,12 +30,17 @@ const CreateRecruitmentRequest = () => {
   ];
 
   const departments = [
-    { value: 'Kế toán', label: 'Kế toán' },
-    { value: 'Marketing', label: 'Marketing' },
-    { value: 'IT', label: 'IT' },
-    { value: 'Nhân sự', label: 'Nhân sự' },
-    { value: 'Kinh doanh', label: 'Kinh doanh' }
+    { value: 'accounting', label: 'Kế Toán' },
+    { value: 'marketing', label: 'Marketing' },
+    { value: 'it', label: 'IT' },
+    { value: 'hr', label: 'Nhân Sự' },
+    { value: 'business', label: 'Kinh Doanh' }
   ];
+
+  const getDepartmentDisplayName = (value) => {
+    const dept = departments.find(d => d.value === value);
+    return dept ? dept.label : value;
+  };
 
   // Kiểm tra token và lấy thông tin người dùng khi component mount
   useEffect(() => {
@@ -54,6 +59,14 @@ const CreateRecruitmentRequest = () => {
           }
         });
         setCurrentUser(response.data);
+        
+        // Nếu người dùng là trưởng phòng ban (không phải phòng Nhân sự), tự động điền phòng ban
+        if (response.data.role === 'department_head' && response.data.department !== 'hr') {
+          setFormData(prev => ({
+            ...prev,
+            department: response.data.department
+          }));
+        }
       } catch (error) {
         console.error('Error fetching user data:', error);
         if (error.response?.status === 401) {
@@ -228,13 +241,21 @@ const CreateRecruitmentRequest = () => {
                 <label className="text-sm text-[#1A1A1A] w-full md:w-[120px] mb-2 md:mb-0">
                   Phòng
                 </label>
-                <Select
-                  value={formData.department}
-                  onChange={(value) => handleInputChange('department', value)}
-                  placeholder="Chọn bộ phận/phòng ban yêu cầu tuyển dụng"
-                  className="flex-1"
-                  options={departments}
-                />
+                {currentUser?.role === 'department_head' && currentUser?.department !== 'hr' ? (
+                  <Input
+                    value={getDepartmentDisplayName(formData.department)}
+                    disabled
+                    className="flex-1 border-0 border-b border-[#E0E0E0] rounded-none px-0 h-[36px] bg-transparent"
+                  />
+                ) : (
+                  <Select
+                    value={formData.department}
+                    onChange={(value) => handleInputChange('department', value)}
+                    placeholder="Chọn bộ phận/phòng ban yêu cầu tuyển dụng"
+                    className="flex-1"
+                    options={departments}
+                  />
+                )}
               </div>
               <div className="flex flex-col md:flex-row md:items-center">
                 <label className="text-sm text-[#1A1A1A] w-full md:w-[120px] mb-2 md:mb-0">
