@@ -86,7 +86,7 @@ const RecruitmentRequestDetail = () => {
       <div className="max-w-[1200px] mx-auto bg-white rounded-lg p-4 md:p-6 mt-[80px]">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-[20px] font-medium text-[#1A1A1A] mb-4">Chi tiết phiếu tuyển dụng</h1>
+          <h1 className="text-[20px] font-medium text-[#1A1A1A] mb-4">Chi tiết yêu cầu tuyển dụng</h1>
           
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             {/* Progress Steps */}

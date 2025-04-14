@@ -64,10 +64,14 @@ const Topbar = () => {
       '/notifications/edit/:id': 'Chỉnh sửa thông báo',
       '/notifications/:id': 'Thông báo ứng viên mới',
       '/notifications/:id/evaluate': 'Đánh giá ứng viên',
-      '/account-management': 'Quản lý tài khoản'
+      '/account-management': 'Quản lý tài khoản',
+      '/hr/recruitment-requests/create': 'Khởi tạo yêu cầu tuyển dụng',
     };
 
     // Xử lý các route có tham số động
+    if (pathname === '/hr/recruitment-requests/create') {
+      return 'Khởi tạo yêu cầu tuyển dụng';
+    }
     if (pathname.includes('/positions/') && pathname.includes('/candidates')) {
       return 'Danh sách ứng viên';
     }
