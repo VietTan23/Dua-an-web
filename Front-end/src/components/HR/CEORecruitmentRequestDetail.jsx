@@ -379,10 +379,7 @@ const CEORecruitmentRequestDetail = () => {
                 <label className="block text-sm mb-1 text-[#1A1A1A]">Người phê duyệt</label>
                 <div className="space-y-2">
                   <div className="h-[36px] px-3 flex items-center border border-[#E0E0E0] rounded-lg text-sm">
-                    Trưởng phòng
-                  </div>
-                  <div className="h-[36px] px-3 flex items-center border border-[#E0E0E0] rounded-lg text-sm">
-                    Giám đốc kinh doanh
+                    Người tạo yêu cầu tuyển dụng
                   </div>
                   <div className="h-[36px] px-3 flex items-center border border-[#E0E0E0] rounded-lg text-sm">
                     Tổng Giám Đốc

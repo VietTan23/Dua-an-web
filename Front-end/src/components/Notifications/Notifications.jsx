@@ -73,10 +73,6 @@ const Notifications = () => {
     setFilterValue(''); // Reset filter value when changing filter type
   };
 
-  const getUniqueValues = (field) => {
-    return [...new Set(notifications.map(item => item[field]).filter(Boolean))];
-  };
-
   const fetchNotifications = async () => {
     try {
       setLoading(true);
@@ -179,7 +175,7 @@ const Notifications = () => {
     <div className="p-6 pt-[104px] pl-[298px]">
       <div className="bg-white rounded-lg shadow p-6">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-semibold">Thông báo ứng viên mới</h1>
+          <h1 className="text-2xl font-semibold">Danh sách thông báo ứng viên</h1>
           <div className="flex items-center gap-4">
             <Input
               placeholder="Search..."
