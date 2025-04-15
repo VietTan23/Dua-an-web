@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout } from 'antd';
+import { Layout, Modal } from 'antd';
 import { FaPlus, FaFilter, FaTrash } from 'react-icons/fa';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
@@ -19,6 +19,7 @@ const RecruitmentRequests = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [selectedDepartments, setSelectedDepartments] = useState([]);
   const [selectedStatuses, setSelectedStatuses] = useState([]);
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
   // Lấy danh sách phòng ban và trạng thái duy nhất từ requests
   const departments = [...new Set(requests.map(request => request.department))];
@@ -143,9 +144,16 @@ const RecruitmentRequests = () => {
 
       setRequests(prev => prev.filter(request => !selectedRequests.includes(request._id)));
       setSelectedRequests([]);
+      Modal.success({
+        title: 'Thành công',
+        content: 'Đã xóa yêu cầu tuyển dụng thành công',
+      });
     } catch (error) {
       console.error('Error deleting requests:', error);
-      setError('Có lỗi xảy ra khi xóa yêu cầu');
+      Modal.error({
+        title: 'Lỗi',
+        content: 'Có lỗi xảy ra khi xóa yêu cầu',
+      });
     }
   };
 
@@ -243,7 +251,7 @@ const RecruitmentRequests = () => {
                       ? 'hover:bg-red-500 hover:text-white hover:border-red-500' 
                       : 'opacity-50 cursor-not-allowed'
                   }`}
-                  onClick={handleDelete}
+                  onClick={() => selectedRequests.length > 0 && setIsDeleteModalVisible(true)}
                   disabled={selectedRequests.length === 0}
                 >
                   <FaTrash size={14} />
@@ -331,7 +339,7 @@ const RecruitmentRequests = () => {
                         }}
                       />
                     </th>
-                    <th className="p-4 text-left text-sm font-medium text-gray-600 sticky top-0 bg-[#F9FAFB]">ID phiếu</th>
+                    <th className="p-4 text-left text-sm font-medium text-gray-600 sticky top-0 bg-[#F9FAFB]">STT</th>
                     <th className="p-4 text-left text-sm font-medium text-gray-600 sticky top-0 bg-[#F9FAFB]">Nhân sự lập phiếu</th>
                     <th className="p-4 text-left text-sm font-medium text-gray-600 sticky top-0 bg-[#F9FAFB]">Nhân sự phụ trách</th>
                     <th className="p-4 text-left text-sm font-medium text-gray-600 sticky top-0 bg-[#F9FAFB]">Vị trí</th>
@@ -435,6 +443,19 @@ const RecruitmentRequests = () => {
           </div>
         </Content>
       </Layout>
+
+      {/* Delete Confirmation Modal */}
+      <Modal
+        title="Xác nhận xóa"
+        open={isDeleteModalVisible}
+        onOk={handleDelete}
+        onCancel={() => setIsDeleteModalVisible(false)}
+        okText="Xóa"
+        cancelText="Hủy"
+        okButtonProps={{ danger: true }}
+      >
+        <p>Bạn có chắc chắn muốn xóa {selectedRequests.length} yêu cầu tuyển dụng đã chọn?</p>
+      </Modal>
     </Layout>
   );
 };

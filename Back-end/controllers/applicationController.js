@@ -161,6 +161,25 @@ const updateApplication = async (req, res) => {
 const deleteApplication = async (req, res) => {
   try {
     const { id } = req.params;
+    
+    // Kiểm tra xem yêu cầu có tồn tại không
+    const application = await Application.findById(id);
+    if (!application) {
+      return res.status(404).json({ message: 'Không tìm thấy yêu cầu tuyển dụng' });
+    }
+    
+    // Kiểm tra quyền xóa
+    // Nếu là trưởng phòng ban, chỉ cho phép xóa yêu cầu do họ tạo ra
+    if (req.isDepartmentHead) {
+      // Kiểm tra xem người dùng có phải là người tạo yêu cầu không
+      if (application.requester.toString() !== req.userId.toString()) {
+        return res.status(403).json({ 
+          message: 'Bạn chỉ có quyền xóa yêu cầu tuyển dụng do mình tạo ra' 
+        });
+      }
+    }
+    
+    // Thực hiện xóa
     await Application.findByIdAndDelete(id);
     res.status(200).json({ message: 'Xóa yêu cầu thành công' });
   } catch (error) {

@@ -138,6 +138,13 @@ const authorizeAdminHR = (action) => {
         // Lưu department vào request để controller có thể sử dụng
         req.userDepartment = req.user.department;
         return next();
+      } 
+      // Cho phép trưởng phòng xóa yêu cầu tuyển dụng do họ tạo ra
+      else if (action === 'delete' && req.originalUrl.includes('/api/applications/')) {
+        // Lưu thông tin để controller có thể kiểm tra
+        req.isDepartmentHead = true;
+        req.userId = req.user._id;
+        return next();
       } else {
         return res.status(403).json({
           message: 'Trưởng phòng ban chỉ có quyền xem và tạo thông tin',
