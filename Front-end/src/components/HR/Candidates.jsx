@@ -174,40 +174,6 @@ const Candidates = () => {
       render: (date) => new Date(date).toLocaleDateString('vi-VN'),
     },
     {
-      title: 'Tài liệu',
-      key: 'documents',
-      width: '8%',
-      align: 'center',
-      render: (_, record) => (
-        <Space size="small">
-          {record.cv && (
-            <Tooltip title="Xem CV">
-              <Button 
-                type="text" 
-                icon={<FileTextOutlined />} 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  window.open(record.cv.url, '_blank');
-                }}
-              />
-            </Tooltip>
-          )}
-          {record.video && (
-            <Tooltip title="Xem video">
-              <Button 
-                type="text" 
-                icon={<VideoCameraOutlined />} 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  window.open(record.video, '_blank');
-                }}
-              />
-            </Tooltip>
-          )}
-        </Space>
-      ),
-    },
-    {
       title: 'Trạng thái',
       key: 'stage',
       dataIndex: 'stage',

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Calendar as AntCalendar, Badge } from 'antd';
-import dayjs from 'dayjs';
 import 'dayjs/locale/vi';
 
 const interviews = [

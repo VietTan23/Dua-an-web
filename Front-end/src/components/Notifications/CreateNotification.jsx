@@ -230,8 +230,7 @@ const CreateNotification = () => {
         'idCard.number',
         'idCard.issueDate',
         'idCard.issuePlace',
-        'startDate',
-        'insuranceNumber'
+        'startDate'
       ];
       
       const missingFields = requiredFields.filter(field => {
@@ -580,13 +579,6 @@ const CreateNotification = () => {
                   rules={[{ required: true, message: 'Vui lòng chọn ngày vào làm việc' }]}
                 >
                   <DatePicker className="w-full" />
-                </Form.Item>
-
-                <Form.Item
-                  label={<span>Số sổ BHXH</span>}
-                  name="insuranceNumber"
-                >
-                  <Input />
                 </Form.Item>
 
                 <Form.Item
