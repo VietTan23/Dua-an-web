@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://backendhr-9ti5.onrender.com/api', // Sửa port từ 5000 thành 8000
+  baseURL: 'http://localhost:8000/api', // Sửa port từ 5000 thành 8000
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json'

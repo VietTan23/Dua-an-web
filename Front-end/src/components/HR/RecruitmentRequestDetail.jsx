@@ -40,7 +40,7 @@ const RecruitmentRequestDetail = () => {
           return;
         }
 
-        const response = await axios.get(`https://backendhr-9ti5.onrender.com/api/applications/${id}`, {
+        const response = await axios.get(`http://localhost:8000/api/applications/${id}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -49,7 +49,7 @@ const RecruitmentRequestDetail = () => {
         // Fetch user data if we have userId
         if (response.data.userId) {
           try {
-            const userResponse = await axios.get(`https://backendhr-9ti5.onrender.com/api/users/${response.data.userId}`, {
+            const userResponse = await axios.get(`http://localhost:8000/api/users/${response.data.userId}`, {
               headers: {
                 'Authorization': `Bearer ${token}`
               }

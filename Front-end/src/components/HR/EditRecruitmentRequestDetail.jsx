@@ -53,7 +53,7 @@ const EditRecruitmentRequestDetail = () => {
         return;
       }
 
-      const response = await axios.get(`https://backendhr-9ti5.onrender.com/api/applications/${id}`, {
+      const response = await axios.get(`http://localhost:8000/api/applications/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -62,7 +62,7 @@ const EditRecruitmentRequestDetail = () => {
       // Fetch user data if we have userId
       if (response.data.userId) {
         try {
-          const userResponse = await axios.get(`https://backendhr-9ti5.onrender.com/api/users/${response.data.userId}`, {
+          const userResponse = await axios.get(`http://localhost:8000/api/users/${response.data.userId}`, {
             headers: {
               'Authorization': `Bearer ${token}`
             }
@@ -124,7 +124,7 @@ const EditRecruitmentRequestDetail = () => {
         return;
       }
 
-      await axios.put(`https://backendhr-9ti5.onrender.com/api/applications/${id}`, formData, {
+      await axios.put(`http://localhost:8000/api/applications/${id}`, formData, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

@@ -69,7 +69,7 @@ const RecruitmentRequests = () => {
           return;
         }
 
-        const response = await axios.get('https://backendhr-9ti5.onrender.com/api/applications', {
+        const response = await axios.get('http://localhost:8000/api/applications', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -134,7 +134,7 @@ const RecruitmentRequests = () => {
 
       await Promise.all(
         selectedRequests.map(requestId =>
-          axios.delete(`https://backendhr-9ti5.onrender.com/api/applications/${requestId}`, {
+          axios.delete(`http://localhost:8000/api/applications/${requestId}`, {
             headers: {
               'Authorization': `Bearer ${token}`
             }
