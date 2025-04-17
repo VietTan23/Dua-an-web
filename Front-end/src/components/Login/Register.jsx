@@ -31,11 +31,18 @@ const Register = () => {
   ];
 
   const departments = [
-    { id: 'accounting', name: 'Kế toán' },
-    { id: 'marketing', name: 'Marketing' },
-    { id: 'it', name: 'IT' },
-    { id: 'hr', name: 'Nhân sự' },
-    { id: 'sales', name: 'Kinh doanh' }
+    { id: 'operations', name: 'Bộ phận Điều hành' },
+    { id: 'accounting', name: 'Bộ phận Kế toán' },
+    { id: 'hr', name: 'Bộ phận Tuyển sinh Hà Nội' },
+    { id: 'hr', name: 'Bộ phận Tuyển sinh Hồ Chí Minh' },
+    { id: 'marketing', name: 'Bộ phận Marketing' },
+    { id: 'hr', name: 'Phòng Đào tạo' },
+    { id: 'hr', name: 'Bộ phận Hành chính nhân sự' },
+    { id: 'hr', name: 'Bộ phận Cung ứng nguồn nhân lực' },
+    { id: 'operations', name: 'Bộ phận Vận hành' },
+    { id: 'it', name: 'Bộ phận R&D' },
+    { id: 'it', name: 'Bộ phận RikaSoft' },
+    { id: 'marketing', name: 'Bộ phận Phát triển thị trường' }
   ];
 
   const validateForm = () => {
@@ -62,7 +69,7 @@ const Register = () => {
       errors.role = 'Vui lòng chọn vai trò';
     }
 
-    if (formData.role === 'department_head' && !formData.department) {
+    if ((formData.role === 'department_head' || formData.role === 'business_director') && !formData.department) {
       errors.department = 'Vui lòng chọn phòng ban';
     }
 
@@ -84,8 +91,8 @@ const Register = () => {
     setFormData(prev => ({
       ...prev,
       [name]: value,
-      // Reset department when role changes
-      ...(name === 'role' && value !== 'department_head' ? { department: '' } : {})
+      // Reset department when role changes and is not department_head or business_director
+      ...(name === 'role' && value !== 'department_head' && value !== 'business_director' ? { department: '' } : {})
     }));
   };
 
@@ -222,8 +229,8 @@ const Register = () => {
               </select>
             </div>
 
-            {/* Department Selection - Only show when Trưởng phòng ban is selected */}
-            {formData.role === 'department_head' && (
+            {/* Department Selection - Show when role is Trưởng phòng ban or Giám đốc kinh doanh */}
+            {(formData.role === 'department_head' || formData.role === 'business_director') && (
               <div>
                 <label className="block text-sm font-medium text-[#1A1A1A] mb-2">
                   Phòng ban <span className="text-red-500">*</span>

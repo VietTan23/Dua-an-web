@@ -277,4 +277,27 @@ exports.downloadJD = async (req, res) => {
     console.error('Error in downloadJD:', error);
     res.status(500).json({ message: 'Lỗi khi tải xuống JD' });
   }
+};
+
+// Lấy danh sách vị trí tuyển dụng đang active
+exports.getActivePositions = async (req, res) => {
+  try {
+    const positions = await Position.find({ status: 'Còn tuyển' })
+      .select('title type workMode salary department')
+      .lean();
+
+    const formattedPositions = positions.map(position => ({
+      title: position.title,
+      type: position.type || 'Full-time',
+      workMode: position.workMode || 'On-site',
+      salary: position.salary || 'Thỏa thuận',
+      department: position.department,
+      applicants: '0' // Mặc định là 0, sau này có thể cập nhật từ bảng Applications
+    }));
+
+    res.json(formattedPositions);
+  } catch (error) {
+    console.error('Error in getActivePositions:', error);
+    res.status(500).json({ error: 'Không thể lấy danh sách vị trí tuyển dụng' });
+  }
 }; 

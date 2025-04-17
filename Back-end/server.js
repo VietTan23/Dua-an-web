@@ -33,6 +33,7 @@ const emailRoutes = require('./routes/emailRoutes');
 const commentRoutes = require('./routes/commentRoutes');
 const evaluationRoutes = require('./routes/evaluationRoutes');
 const recruitmentNotificationRoutes = require('./routes/recruitmentNotificationRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
 
 // Cloudinary configuration
 cloudinary.config({
@@ -86,6 +87,7 @@ app.use('/api/emails', emailRoutes);
 app.use('/api/candidates', commentRoutes);
 app.use('/api/evaluations', evaluationRoutes);
 app.use('/api/recruitment-notifications', recruitmentNotificationRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

@@ -7,10 +7,14 @@ const {
   createPosition,
   updatePosition,
   deletePosition,
-  downloadJD
+  downloadJD,
+  getActivePositions
 } = require('../controllers/positionController');
 const { handleCVUpload } = require('../middlewares/uploadMiddleware');
 const candidateController = require('../controllers/candidateController');
+
+// Lấy danh sách vị trí tuyển dụng đang active
+router.get('/active', protect, getActivePositions);
 
 // Public routes
 router.get('/', protect, authorizeAdminHR('view'), getPositions);
