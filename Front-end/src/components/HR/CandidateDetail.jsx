@@ -10,7 +10,7 @@ import AddEventModal from '../Calendar/AddEventModal';
 
 const { Content } = Layout;
 const { TextArea } = Input;
-const API_BASE_URL = 'http://localhost:8000/api';
+const API_BASE_URL = 'https://backendhr-9ti5.onrender.com/api';
 
 moment.locale('vi');
 
@@ -414,7 +414,7 @@ const CandidateDetail = () => {
       if (upcomingInterview && upcomingInterview._id) {
         // Cập nhật sự kiện hiện có
         response = await axios.put(
-          `http://localhost:8000/api/interviews/${upcomingInterview._id}`,
+          `https://backendhr-9ti5.onrender.com/api/interviews/${upcomingInterview._id}`,
           formattedData,
           {
             headers: { 
@@ -426,7 +426,7 @@ const CandidateDetail = () => {
       } else {
         // Tạo sự kiện mới
         response = await axios.post(
-          'http://localhost:8000/api/interviews',
+          'https://backendhr-9ti5.onrender.com/api/interviews',
           formattedData,
           {
             headers: { 

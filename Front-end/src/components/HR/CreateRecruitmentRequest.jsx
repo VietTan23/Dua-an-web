@@ -53,7 +53,7 @@ const CreateRecruitmentRequest = () => {
       }
 
       try {
-        const response = await axios.get('http://localhost:8000/api/users/profile', {
+        const response = await axios.get('https://backendhr-9ti5.onrender.com/api/users/profile', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -114,7 +114,7 @@ const CreateRecruitmentRequest = () => {
 
       // Tạo instance của axios với cấu hình mặc định
       const api = axios.create({
-        baseURL: 'http://localhost:8000',
+        baseURL: 'https://backendhr-9ti5.onrender.com',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'

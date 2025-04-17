@@ -61,7 +61,7 @@ const AddEventModal = ({ visible, onClose, onSave, selectedDate, candidateId, ex
 
       // Fetch candidates for calendar
       try {
-        const candidatesResponse = await axios.get('http://localhost:8000/api/candidates/calendar/candidates', {
+        const candidatesResponse = await axios.get('https://backendhr-9ti5.onrender.com/api/candidates/calendar/candidates', {
           headers: { 
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -88,7 +88,7 @@ const AddEventModal = ({ visible, onClose, onSave, selectedDate, candidateId, ex
 
       // Fetch users
       try {
-        const usersResponse = await axios.get('http://localhost:8000/api/users/all', {
+        const usersResponse = await axios.get('https://backendhr-9ti5.onrender.com/api/users/all', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         

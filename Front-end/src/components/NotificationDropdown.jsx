@@ -11,7 +11,7 @@ const NotificationDropdown = () => {
   const fetchNotifications = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8000/api/recruitment-notifications', {
+      const response = await axios.get('https://backendhr-9ti5.onrender.com/api/recruitment-notifications', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -36,7 +36,7 @@ const NotificationDropdown = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:8000/api/recruitment-notifications/${notification.recruitmentId}/read`,
+        `https://backendhr-9ti5.onrender.com/api/recruitment-notifications/${notification.recruitmentId}/read`,
         {},
         {
           headers: {

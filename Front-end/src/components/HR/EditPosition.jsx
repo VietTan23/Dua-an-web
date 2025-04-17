@@ -49,7 +49,7 @@ const EditPosition = () => {
         return;
       }
 
-      const response = await fetch(`http://localhost:8000/api/positions/${id}`, {
+      const response = await fetch(`https://backendhr-9ti5.onrender.com/api/positions/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -75,7 +75,7 @@ const EditPosition = () => {
         return;
       }
 
-      const response = await axios.get('http://localhost:8000/api/applications', {
+      const response = await axios.get('https://backendhr-9ti5.onrender.com/api/applications', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -123,7 +123,7 @@ const EditPosition = () => {
         return;
       }
 
-      const response = await fetch(`http://localhost:8000/api/positions/${id}`, {
+      const response = await fetch(`https://backendhr-9ti5.onrender.com/api/positions/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

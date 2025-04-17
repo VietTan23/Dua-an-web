@@ -44,7 +44,7 @@ const EventDetail = () => {
         return;
       }
 
-      const response = await axios.get(`http://localhost:8000/api/interviews/${eventId}`, {
+      const response = await axios.get(`https://backendhr-9ti5.onrender.com/api/interviews/${eventId}`, {
         headers: { 
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -80,7 +80,7 @@ const EventDetail = () => {
         return;
       }
 
-      const response = await axios.get('http://localhost:8000/api/interviews', {
+      const response = await axios.get('https://backendhr-9ti5.onrender.com/api/interviews', {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -176,7 +176,7 @@ const EventDetail = () => {
         return;
       }
 
-      const response = await axios.post('http://localhost:8000/api/interviews', formattedData, {
+      const response = await axios.post('https://backendhr-9ti5.onrender.com/api/interviews', formattedData, {
         headers: { 
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
