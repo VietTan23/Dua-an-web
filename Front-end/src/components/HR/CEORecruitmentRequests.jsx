@@ -25,7 +25,7 @@ const CEORecruitmentRequests = () => {
           return;
         }
 
-        const response = await axios.get('http://localhost:8000/api/applications', {
+        const response = await axios.get('https://backendhr-9ti5.onrender.com/api/applications', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -120,7 +120,7 @@ const CEORecruitmentRequests = () => {
       // Nếu trạng thái là "Đã nộp", cập nhật thành "Đang duyệt" và lưu người phụ trách
       if (request.status === 'Đã nộp') {
         const response = await axios.patch(
-          `http://localhost:8000/api/applications/${request._id}/review`,
+          `https://backendhr-9ti5.onrender.com/api/applications/${request._id}/review`,
           { 
             status: 'Đang duyệt',
             responsible: user.id // ID của người dùng hiện tại
@@ -136,7 +136,7 @@ const CEORecruitmentRequests = () => {
         // Xóa thông báo khi chuyển sang trạng thái Đang duyệt
         try {
           await axios.delete(
-            `http://localhost:8000/api/recruitment-notifications/by-recruitment/${request._id}`,
+            `https://backendhr-9ti5.onrender.com/api/recruitment-notifications/by-recruitment/${request._id}`,
             {
               headers: {
                 'Authorization': `Bearer ${token}`

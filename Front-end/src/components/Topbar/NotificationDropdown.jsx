@@ -12,7 +12,7 @@ const NotificationDropdown = () => {
   const fetchNotifications = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:8000/api/recruitment-notifications', {
+      const response = await axios.get('https://backendhr-9ti5.onrender.com/api/recruitment-notifications', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }

@@ -7,7 +7,7 @@ const asyncHandler = require('express-async-handler');
 const getInterviews = asyncHandler(async (req, res) => {
   const interviews = await Interview.find()
     .populate('candidate', 'name position')
-    .populate('attendees', 'username email');
+    .populate('attendees', 'username email fullName');
   res.json(interviews);
 });
 
@@ -17,8 +17,8 @@ const getInterviews = asyncHandler(async (req, res) => {
 const getInterviewById = asyncHandler(async (req, res) => {
   const interview = await Interview.findById(req.params.id)
     .populate('candidate', 'name position')
-    .populate('attendees', 'username email')
-    .populate('createdBy', 'username');
+    .populate('attendees', 'username email fullName')
+    .populate('createdBy', 'username fullName');
 
   if (!interview) {
     res.status(404);

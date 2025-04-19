@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import NotificationDropdown from './NotificationDropdown';
 
 const { Header } = Layout;
-const API_BASE_URL = 'http://localhost:8000/api';
+const API_BASE_URL = 'https://backendhr-9ti5.onrender.com/api';
 
 const Topbar = () => {
   const location = useLocation();

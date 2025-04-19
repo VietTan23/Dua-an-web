@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const { Content } = Layout;
-const API_BASE_URL = 'http://localhost:8000/api';
+const API_BASE_URL = 'https://backendhr-9ti5.onrender.com/api';
 
 const Candidates = () => {
   const navigate = useNavigate();

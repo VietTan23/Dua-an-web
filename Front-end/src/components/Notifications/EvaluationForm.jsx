@@ -155,7 +155,7 @@ Trường hợp cần hỗ trợ, Anh/Chị vui lòng liên hệ trực tiếp.
 
 Trân trọng cảm ơn!`);
 
-          const response = await axios.post('http://localhost:8000/api/emails/send', formData, {
+          const response = await axios.post('https://backendhr-9ti5.onrender.com/api/emails/send', formData, {
             headers: {
               'Authorization': `Bearer ${localStorage.getItem('token')}`,
               'Content-Type': 'multipart/form-data'

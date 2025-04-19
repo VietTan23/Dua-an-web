@@ -46,7 +46,7 @@ const CEORecruitmentRequestDetail = () => {
           return;
         }
 
-        const response = await axios.get(`http://localhost:8000/api/applications/${id}`, {
+        const response = await axios.get(`https://backendhr-9ti5.onrender.com/api/applications/${id}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -55,7 +55,7 @@ const CEORecruitmentRequestDetail = () => {
         if (response.data.status === 'Đã nộp') {
           try {
             const updateResponse = await axios.put(
-              `http://localhost:8000/api/applications/${id}`,
+              `https://backendhr-9ti5.onrender.com/api/applications/${id}`,
               { status: 'Đang duyệt' },
               {
                 headers: {
@@ -87,7 +87,7 @@ const CEORecruitmentRequestDetail = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.put(
-        `http://localhost:8000/api/applications/${id}`,
+        `https://backendhr-9ti5.onrender.com/api/applications/${id}`,
         { status: 'Đã duyệt' },
         {
           headers: {
@@ -99,7 +99,7 @@ const CEORecruitmentRequestDetail = () => {
       // Xóa thông báo khi phê duyệt
       try {
         await axios.delete(
-          `http://localhost:8000/api/recruitment-notifications/by-recruitment/${id}`,
+          `https://backendhr-9ti5.onrender.com/api/recruitment-notifications/by-recruitment/${id}`,
           {
             headers: {
               'Authorization': `Bearer ${token}`
@@ -126,7 +126,7 @@ const CEORecruitmentRequestDetail = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.put(
-        `http://localhost:8000/api/applications/${id}`,
+        `https://backendhr-9ti5.onrender.com/api/applications/${id}`,
         { 
           status: 'Từ chối',
           rejectReason: rejectReason 
@@ -141,7 +141,7 @@ const CEORecruitmentRequestDetail = () => {
       // Xóa thông báo khi từ chối
       try {
         await axios.delete(
-          `http://localhost:8000/api/recruitment-notifications/by-recruitment/${id}`,
+          `https://backendhr-9ti5.onrender.com/api/recruitment-notifications/by-recruitment/${id}`,
           {
             headers: {
               'Authorization': `Bearer ${token}`

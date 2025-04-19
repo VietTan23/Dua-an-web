@@ -53,7 +53,7 @@ const Calendar = () => {
   const fetchEvents = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8000/api/interviews', {
+      const response = await axios.get('https://backendhr-9ti5.onrender.com/api/interviews', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setEvents(response.data);
@@ -88,7 +88,7 @@ const Calendar = () => {
         // Xóa từng sự kiện đã qua thời gian
         for (const event of pastEvents) {
           try {
-            await axios.delete(`http://localhost:8000/api/interviews/${event._id}`, {
+            await axios.delete(`https://backendhr-9ti5.onrender.com/api/interviews/${event._id}`, {
               headers: { Authorization: `Bearer ${token}` }
             });
             console.log('Successfully deleted event:', event._id);
@@ -265,7 +265,7 @@ const Calendar = () => {
         return;
       }
 
-      const response = await axios.post('http://localhost:8000/api/interviews', formattedData, {
+      const response = await axios.post('https://backendhr-9ti5.onrender.com/api/interviews', formattedData, {
         headers: { 
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
