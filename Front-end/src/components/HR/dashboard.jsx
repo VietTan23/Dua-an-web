@@ -1,5 +1,5 @@
-import React from 'react';
-import { Layout, Button, Select } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Layout, Button, Select, Spin } from 'antd';
 import { FileTextOutlined, UserOutlined, TeamOutlined, CloseCircleOutlined, CodeOutlined } from '@ant-design/icons';
 import Sidebar from '../Sidebar/Sidebar';
 import Topbar from '../Topbar/Topbar';
@@ -10,6 +10,8 @@ import PositionStats from './PositionStats';
 import EmployeeStats from './EmployeeStats';
 import Calendar from './Calendar';
 import ApplicationSourceStats from './ApplicationSourceStats';
+import { getActivePositions } from '../../services/positionService';
+import { Link } from 'react-router-dom';
 
 const { Content } = Layout;
 const { Option } = Select;
@@ -49,7 +51,8 @@ const statCards = [
   }
 ];
 
-const jobPositions = [
+// Fallback data in case API fails
+const fallbackJobPositions = [
   {
     title: 'Giáo Viên DA',
     type: 'Full-time',
@@ -93,6 +96,54 @@ const jobPositions = [
 ];
 
 export default function Dashboard() {
+  const [jobPositions, setJobPositions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchJobPositions = async () => {
+      try {
+        setLoading(true);
+        const response = await getActivePositions();
+        if (response && response.data) {
+          // Transform the data to match the JobCard component props
+          const transformedPositions = response.data.map(position => {
+            // Determine icon based on department or title
+            let icon;
+            if (position.department && (position.department.toLowerCase().includes('it') || position.title.toLowerCase().includes('developer'))) {
+              icon = <CodeOutlined className="text-purple-600 text-xl" />;
+            } else if (position.department && (position.department.toLowerCase().includes('hr') || position.title.toLowerCase().includes('nhân sự'))) {
+              icon = <TeamOutlined className="text-green-600 text-xl" />;
+            } else {
+              icon = <UserOutlined className="text-blue-600 text-xl" />;
+            }
+
+            return {
+              title: position.title,
+              type: position.type || 'Full-time',
+              workMode: position.mode || 'On-site',
+              salary: position.salary || 'Thỏa thuận',
+              applicants: position.applicants || '0',
+              icon: icon
+            };
+          });
+
+          setJobPositions(transformedPositions);
+        } else {
+          setJobPositions(fallbackJobPositions);
+        }
+      } catch (err) {
+        console.error('Error fetching job positions:', err);
+        setError('Không thể tải dữ liệu vị trí tuyển dụng');
+        setJobPositions(fallbackJobPositions);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchJobPositions();
+  }, []);
+
   return (
     <Layout style={{ minHeight: '100vh', background: '#F5F5F5' }}>
       <Sidebar />
@@ -111,20 +162,28 @@ export default function Dashboard() {
 
               {/* Job Positions Header */}
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-bold">Vị trí tuyển dụng (5)</h2>
-                <Button type="link" className="text-[#7152F3] font-medium p-0">
+                <h2 className="text-lg font-bold">Vị trí tuyển dụng ({jobPositions.length})</h2>
+                <Link to="/positions" className="text-[#7152F3] font-medium hover:underline">
                   Tất cả
-                </Button>
+                </Link>
               </div>
 
               {/* Job Positions Cards */}
-              <div className="space-y-2">
-                {jobPositions.map((job, index) => (
-                  <div key={index} className="bg-white px-4 py-3 rounded-[10px] shadow-sm">
-                    <JobCard {...job} />
-                  </div>
-                ))}
-              </div>
+              {loading ? (
+                <div className="flex justify-center items-center h-40">
+                  <Spin size="large" />
+                </div>
+              ) : error ? (
+                <div className="text-red-500 text-center p-4">{error}</div>
+              ) : (
+                <div className="space-y-2">
+                  {jobPositions.map((job, index) => (
+                    <div key={index} className="bg-white px-4 py-3 rounded-[10px] shadow-sm">
+                      <JobCard {...job} />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Center Column */}

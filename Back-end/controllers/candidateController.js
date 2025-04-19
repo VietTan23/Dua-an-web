@@ -569,4 +569,64 @@ const sendEmail = async (req, res) => {
     console.error('Error in sendEmail:', error);
     res.status(500).json({ message: 'Lỗi khi gửi email' });
   }
+};
+
+// Lấy thống kê ứng viên theo nguồn
+exports.getCandidateSourceStats = async (req, res) => {
+  try {
+    // Lấy tất cả ứng viên
+    const candidates = await Candidate.find({});
+    
+    // Tính toán số lượng ứng viên theo nguồn
+    const sourceStats = {};
+    let totalCandidates = candidates.length;
+    
+    candidates.forEach(candidate => {
+      const source = candidate.source;
+      if (!sourceStats[source]) {
+        sourceStats[source] = 0;
+      }
+      sourceStats[source]++;
+    });
+    
+    // Tính phần trăm cho mỗi nguồn
+    const sourceStatsWithPercentage = Object.keys(sourceStats).map(source => {
+      const count = sourceStats[source];
+      const percentage = totalCandidates > 0 ? Math.round((count / totalCandidates) * 100) : 0;
+      
+      // Gán màu sắc cho từng nguồn
+      let color;
+      switch (source) {
+        case 'Facebook':
+          color = '#8884d8';
+          break;
+        case 'Email':
+          color = '#82ca9d';
+          break;
+        case 'JobsGo':
+          color = '#ff7c43';
+          break;
+        case 'Khác':
+          color = '#d3d3d3';
+          break;
+        default:
+          color = '#8884d8';
+      }
+      
+      return {
+        name: source,
+        value: percentage,
+        count: count,
+        color: color
+      };
+    });
+    
+    res.json({
+      message: 'Lấy thống kê ứng viên theo nguồn thành công',
+      data: sourceStatsWithPercentage
+    });
+  } catch (error) {
+    console.error('Error getting candidate source stats:', error);
+    res.status(500).json({ message: 'Có lỗi xảy ra khi lấy thống kê ứng viên theo nguồn' });
+  }
 }; 

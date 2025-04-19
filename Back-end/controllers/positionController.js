@@ -282,22 +282,26 @@ exports.downloadJD = async (req, res) => {
 // Lấy danh sách vị trí tuyển dụng đang active
 exports.getActivePositions = async (req, res) => {
   try {
+    // Lấy tất cả vị trí đang active
     const positions = await Position.find({ status: 'Còn tuyển' })
-      .select('title type workMode salary department')
-      .lean();
-
-    const formattedPositions = positions.map(position => ({
-      title: position.title,
-      type: position.type || 'Full-time',
-      workMode: position.workMode || 'On-site',
-      salary: position.salary || 'Thỏa thuận',
-      department: position.department,
-      applicants: '0' // Mặc định là 0, sau này có thể cập nhật từ bảng Applications
+      .sort({ createdAt: -1 })
+      .limit(5); // Giới hạn 5 vị trí cho dashboard
+    
+    // Đếm tổng số ứng viên cho mỗi vị trí
+    const positionsWithCandidateCount = await Promise.all(positions.map(async (position) => {
+      const candidateCount = await Candidate.countDocuments({ positionId: position._id });
+      return {
+        ...position.toObject(),
+        applicants: candidateCount
+      };
     }));
 
-    res.json(formattedPositions);
+    res.json({
+      message: 'Lấy danh sách vị trí tuyển dụng đang active thành công',
+      data: positionsWithCandidateCount
+    });
   } catch (error) {
     console.error('Error in getActivePositions:', error);
-    res.status(500).json({ error: 'Không thể lấy danh sách vị trí tuyển dụng' });
+    res.status(500).json({ message: 'Lỗi khi lấy danh sách vị trí tuyển dụng đang active' });
   }
 }; 
