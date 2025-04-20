@@ -72,14 +72,14 @@ const SendEmail = () => {
         const token = localStorage.getItem('token');
         
         // Lấy thông tin ứng viên
-        const candidateResponse = await axios.get(`http://localhost:8000/api/candidates/${id}`, {
+        const candidateResponse = await axios.get(`https://backendhr-9ti5.onrender.com/api/candidates/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
         
         // Lấy thông tin phỏng vấn
-        const interviewResponse = await axios.get(`http://localhost:8000/api/interviews/candidate/${id}`, {
+        const interviewResponse = await axios.get(`https://backendhr-9ti5.onrender.com/api/interviews/candidate/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -351,7 +351,7 @@ const SendEmail = () => {
       }
 
       console.log('Sending email request...');
-      const response = await axios.post('http://localhost:8000/api/emails/send', formData, {
+      const response = await axios.post('https://backendhr-9ti5.onrender.com/api/emails/send', formData, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -366,7 +366,7 @@ const SendEmail = () => {
           try {
             console.log('Updating email status for candidate:', id);
             const updateResponse = await axios.patch(
-              `http://localhost:8000/api/candidates/${id}/email-status`,
+              `https://backendhr-9ti5.onrender.com/api/candidates/${id}/email-status`,
               { emailStatus: 'Đã gửi' },
               {
                 headers: {

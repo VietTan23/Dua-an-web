@@ -68,13 +68,13 @@ const ForgotPassword = () => {
     setLoading(true);
     try {
       if (step === 1) {
-        const response = await axios.post('http://localhost:8000/api/users/forgot-password', {
+        const response = await axios.post('https://backendhr-9ti5.onrender.com/api/users/forgot-password', {
           email: formData.email
         });
         setSuccess('Mã xác nhận đã được gửi đến email của bạn!');
         setStep(2);
       } else {
-        const response = await axios.post('http://localhost:8000/api/users/reset-password', {
+        const response = await axios.post('https://backendhr-9ti5.onrender.com/api/users/reset-password', {
           email: formData.email,
           verificationCode: formData.verificationCode,
           newPassword: formData.newPassword

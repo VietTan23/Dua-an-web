@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const { Content } = Layout;
 const { TabPane } = Tabs;
-const API_BASE_URL = 'http://localhost:8000/api';
+const API_BASE_URL = 'https://backendhr-9ti5.onrender.com/api';
 
 const EmailList = () => {
   const navigate = useNavigate();

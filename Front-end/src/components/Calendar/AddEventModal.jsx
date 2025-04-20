@@ -83,7 +83,7 @@ const AddEventModal = ({
       // Fetch candidates for calendar
       try {
         const candidatesResponse = await axios.get(
-          "http://localhost:8000/api/candidates/calendar/candidates",
+          "https://backendhr-9ti5.onrender.com/api/candidates/calendar/candidates",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -120,7 +120,7 @@ const AddEventModal = ({
       // Fetch users
       try {
         const usersResponse = await axios.get(
-          "http://localhost:8000/api/users/all",
+          "https://backendhr-9ti5.onrender.com/api/users/all",
           {
             headers: { Authorization: `Bearer ${token}` },
           }

@@ -26,7 +26,7 @@ const OtherRecruitmentRequests = () => {
           return;
         }
 
-        const response = await axios.get('http://localhost:8000/api/applications', {
+        const response = await axios.get('https://backendhr-9ti5.onrender.com/api/applications', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
