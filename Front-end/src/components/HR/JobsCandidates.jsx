@@ -8,7 +8,7 @@ import Topbar from '../Topbar/Topbar';
 
 const { Content } = Layout;
 const { TextArea } = Input;
-const API_BASE_URL = 'https://backendhr-9ti5.onrender.com/api';
+const API_BASE_URL = 'http://localhost:8000/api';
 
 const JobsCandidates = () => {
   const { id } = useParams();

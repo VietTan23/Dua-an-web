@@ -46,7 +46,7 @@ const EventDetail = () => {
       }
 
       const response = await axios.get(
-        `https://backendhr-9ti5.onrender.com/api/interviews/${eventId}`,
+        `http://localhost:8000/api/interviews/${eventId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -84,7 +84,7 @@ const EventDetail = () => {
         return;
       }
 
-      const response = await axios.get("https://backendhr-9ti5.onrender.com/api/interviews", {
+      const response = await axios.get("http://localhost:8000/api/interviews", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -182,7 +182,7 @@ const EventDetail = () => {
       // }
 
       const response = await axios.post(
-        "https://backendhr-9ti5.onrender.com/api/interviews",
+        "http://localhost:8000/api/interviews",
         formattedData,
         {
           headers: {
@@ -265,7 +265,7 @@ const EventDetail = () => {
       // }
 
       const response = await axios.put(
-        "https://backendhr-9ti5.onrender.com/api/interviews/" + eventId,
+        "http://localhost:8000/api/interviews/" + eventId,
         formattedData,
         {
           headers: {
@@ -302,7 +302,7 @@ const EventDetail = () => {
 
 
       const response = await axios.delete(
-        "https://backendhr-9ti5.onrender.com/api/interviews/" + eventId,
+        "http://localhost:8000/api/interviews/" + eventId,
         {
           headers: {
             Authorization: `Bearer ${token}`,

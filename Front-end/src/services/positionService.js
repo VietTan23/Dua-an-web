@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://backendhr-9ti5.onrender.com/api';
+const API_URL = 'http://localhost:8000/api';
 
 // Lấy danh sách vị trí tuyển dụng
 export const getPositions = async () => {
